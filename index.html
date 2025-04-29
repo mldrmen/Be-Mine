@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>For You</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffe4e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 2rem 1.5rem;
+      margin: 1rem;
+      width: 100%;
+      max-width: 375px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.75rem;
+      color: #d6336c;
+    }
+    p {
+      font-size: 1.05rem;
+      margin: 1.25rem 0;
+      line-height: 1.5;
+    }
+    .btn {
+      background-color: #d6336c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 0.5rem;
+      width: 100%;
+      max-width: 200px;
+    }
+    .btn:hover {
+      background-color: #c2255c;
+    }
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">Just For You</h1>
+    <p id="content">There are so many 'what ifs' in life... But one choice changed everything for me.</p>
+    <div id="buttons">
+      <button class="btn" onclick="nextPage()">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const pages = [
+      {
+        title: "Just For You",
+        content: "There are so many 'what ifs' in life... But one choice changed everything for me."
+      },
+      {
+        title: "What If?",
+        content: "What if I never replied? What if we never met? But we did... and I’m thankful every day."
+      },
+      {
+        title: "Meant To Be",
+        content: "I like to believe that at a certain moment in time, we were meant to meet. I’m grateful I joined that space—and even more thankful you did too."
+      },
+      {
+        title: "The Question",
+        content: "So... will you be my girlfriend?",
+        isFinal: true
+      }
+    ];
+
+    let pageIndex = 0;
+
+    function nextPage() {
+      pageIndex++;
+      const page = pages[pageIndex];
+      document.getElementById('title').textContent = page.title;
+      document.getElementById('content').textContent = page.content;
+
+      const buttons = document.getElementById('buttons');
+      buttons.innerHTML = '';
+
+      if (page.isFinal) {
+        buttons.innerHTML = `
+          <button class="btn" onclick="sayYes()">💙 Yes</button>
+          <button class="btn" onclick="sayYes()">😊 Yes</button>
+        `;
+      } else {
+        buttons.innerHTML = `<button class="btn" onclick="nextPage()">Next</button>`;
+      }
+    }
+
+    function sayYes() {
+      alert("You just made me the happiest person alive 💖");
+    }
+  </script>
+</body>
+</html>
