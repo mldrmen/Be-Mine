@@ -108,7 +108,7 @@
 <body>
   <div class="card">
     <h1 id="title">I just wanted to say...</h1>
-    <p id="content">There are so many 'what ifs' in life... But one choice changed everything for me.</p>
+    <p id="content">There are so many 'what ifs' in life… but one choice changed everything for me.</p>
     <div id="buttons">
       <button class="btn" onclick="nextPage()">Next</button>
     </div>
@@ -118,7 +118,7 @@
     const pages = [
       {
         title: "Just For You",
-        content: "There are so many 'what ifs' in life... But one choice changed everything for me."
+        content: "There are so many 'what ifs' in life… but one choice changed everything for me."
       },
       {
         title: "",
@@ -161,12 +161,11 @@
     }
 
     function sayYes() {
-  document.querySelector('.card').innerHTML = '<p class="handwritten">You’ve just made everything worth it. <br> I love you, my dominique 💙</p>';
-  for (let i = 0; i < 30; i++) {
-    createHeart();
-  }
-}
-    
+      document.querySelector('.card').innerHTML = '<p class="handwritten">You’ve just made everything worth it.<br>I love you, my Dominique 💙</p>';
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    }
 
     function createHeart() {
       const heart = document.createElement('div');
