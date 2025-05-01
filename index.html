@@ -4,12 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>For You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      background-color: #ffe4e6;
+      background-color: #e0f7ff;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -25,10 +27,11 @@
       width: 100%;
       max-width: 375px;
       text-align: center;
+      z-index: 1;
     }
     h1 {
       font-size: 1.75rem;
-      color: #d6336c;
+      color: #0077b6;
     }
     p {
       font-size: 1.05rem;
@@ -36,7 +39,7 @@
       line-height: 1.5;
     }
     .btn {
-      background-color: #d6336c;
+      background-color: #00b4d8;
       color: white;
       border: none;
       border-radius: 10px;
@@ -48,7 +51,49 @@
       max-width: 200px;
     }
     .btn:hover {
-      background-color: #c2255c;
+      background-color: #0096c7;
+    }
+    .handwritten {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #0077b6;
+      margin-top: 1rem;
+    }
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: #00b4d8;
+      transform: rotate(45deg);
+      animation: float 4s linear infinite;
+      z-index: 0;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #00b4d8;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
     }
     @media (max-width: 400px) {
       h1 {
@@ -62,7 +107,7 @@
 </head>
 <body>
   <div class="card">
-    <h1 id="title">Just For You</h1>
+    <h1 id="title">I just wanted to say...</h1>
     <p id="content">There are so many 'what ifs' in life... But one choice changed everything for me.</p>
     <div id="buttons">
       <button class="btn" onclick="nextPage()">Next</button>
@@ -76,16 +121,20 @@
         content: "There are so many 'what ifs' in life... But one choice changed everything for me."
       },
       {
-        title: "What If?",
-        content: "What if I never replied? What if we never met? But we did... and I’m thankful every day."
-      },
-      {
-        title: "Meant To Be",
+        title: "",
         content: "I like to believe that at a certain moment in time, we were meant to meet. I’m grateful I joined that space—and even more thankful you did too."
       },
       {
-        title: "The Question",
-        content: "So... will you be my girlfriend?",
+        title: "",
+        content: "You brought light into my life, and with your gentleness, you taught me that I don't have to carry everything alone or be so hard on myself."
+      },
+      {
+        title: "",
+        content: "You have my heart, completely. I’ll keep showing you how much you mean to me—with patience, with care, and with understanding. I’ll choose you, wholeheartedly, even on the days when things feel a little harder between us."
+      },
+      {
+        title: "My Dominique",
+        content: "I can't imagine my life with anyone but you. You mean so much to me... so, will you be my girlfriend?",
         isFinal: true
       }
     ];
@@ -112,7 +161,20 @@
     }
 
     function sayYes() {
-      alert("You just made me the happiest person alive 💖");
+  document.querySelector('.card').innerHTML = '<p class="handwritten">You’ve just made everything worth it. <br> I love you, my dominique 💙</p>';
+  for (let i = 0; i < 30; i++) {
+    createHeart();
+  }
+}
+    
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
     }
   </script>
 </body>
