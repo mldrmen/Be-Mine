@@ -61,37 +61,17 @@
     }
     .heart {
       position: fixed;
-      width: 20px;
-      height: 20px;
-      background-color: #00b4d8;
-      transform: rotate(45deg);
-      animation: float 4s linear infinite;
+      font-size: 1.5rem;
+      animation: float 3s linear infinite;
       z-index: 0;
-    }
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #00b4d8;
-      border-radius: 50%;
-    }
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-    .heart::after {
-      left: -10px;
-      top: 0;
     }
     @keyframes float {
       0% {
-        transform: translateY(0) rotate(45deg);
+        transform: translateY(0);
         opacity: 1;
       }
       100% {
-        transform: translateY(-100vh) rotate(45deg);
+        transform: translateY(-100vh);
         opacity: 0;
       }
     }
@@ -106,7 +86,15 @@
   </style>
 </head>
 <body>
-  <div class="card">
+
+  <!-- Intro Screen -->
+  <div id="introScreen" class="card">
+    <h1 class="handwritten">You make me the happiest</h1>
+    <button class="btn" onclick="startHearts()">Next</button>
+  </div>
+
+  <!-- Main Card Hidden Initially -->
+  <div id="mainCard" class="card" style="display:none;">
     <h1 id="title">I just wanted to say...</h1>
     <p id="content">There are so many 'what ifs' in life… but one choice changed everything for me.</p>
     <div id="buttons">
@@ -141,6 +129,16 @@
 
     let pageIndex = 0;
 
+    function startHearts() {
+      for (let i = 0; i < 30; i++) {
+        createHeart("💙");
+      }
+      setTimeout(() => {
+        document.getElementById('introScreen').style.display = 'none';
+        document.getElementById('mainCard').style.display = 'block';
+      }, 2000);
+    }
+
     function nextPage() {
       pageIndex++;
       const page = pages[pageIndex];
@@ -152,8 +150,8 @@
 
       if (page.isFinal) {
         buttons.innerHTML = `
-          <button class="btn" onclick="sayYes()">💙 Yes</button>
-          <button class="btn" onclick="sayYes()">😊 Yes</button>
+          <button class="btn" onclick="sayYes()">Yes</button>
+          <button class="btn" onclick="sayNo()">No</button>
         `;
       } else {
         buttons.innerHTML = `<button class="btn" onclick="nextPage()">Next</button>`;
@@ -161,16 +159,31 @@
     }
 
     function sayYes() {
-      document.querySelector('.card').innerHTML = '<p class="handwritten">You’ve just made everything worth it.<br>I love you, my Dominique 💙</p>';
+      document.getElementById('mainCard').innerHTML = `
+        <p class="handwritten">You’ve just made everything worth it.<br>I love you, my Dominique 💙</p>
+      `;
       for (let i = 0; i < 30; i++) {
-        createHeart();
+        createHeart("💙");
       }
     }
 
-    function createHeart() {
+    function sayNo() {
+      document.body.innerHTML = `
+        <div style="text-align:center; font-family:'Dancing Script', cursive; color:#d00000; padding:2rem;">
+          <h1> Lord, if hindi siya para sa akin, kunin mo na 💔.</h1>
+        </div>
+      `;
+      for (let i = 0; i < 40; i++) {
+        createHeart("💔");
+      }
+    }
+
+    function createHeart(symbol) {
       const heart = document.createElement('div');
       heart.className = 'heart';
+      heart.textContent = symbol;
       heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
       heart.style.animationDuration = (2 + Math.random() * 2) + 's';
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 4000);
